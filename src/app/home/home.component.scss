@@ -1,12 +1,9 @@
 .intro-header {
     height: unset !important;
-    
   }
   .intro-2 {
-    background: url("../assets/img/back2.png")no-repeat center center;
+    background: url("../../assets/img/back2.png")no-repeat center center;
     background-size: cover;
-    padding: 50px !important;
-    min-height: 100vh important;
   }
 
   .mdb-navbar{
@@ -14,8 +11,7 @@
     max-height: 50px !important
   }
   .view {
-    min-height: 850px !important;
-  //  padding: 20px !important;
+   height: 100vh !important;
   }
   .btn .fa {
     margin-left: 3px;
@@ -28,7 +24,6 @@
     background: transparent !important;
     max-height: 50px !important
   }
-
   @media (max-width: 768px) {
     .navbar:not(.top-nav-collapse) {
       background: #424f95 !important;
@@ -52,11 +47,14 @@
       background-color: rgba(0, 0, 0, 0.452)
   }
 
-  @media (max-width: 740px) {
-    .full-height,
-    .full-height body,
-    .full-height header,
-    .full-height header .view {
-      height: 1020px;
-    }
+  .navi{
+    max-height: 52px;
   }
+  // @media (max-width: 740px) {
+  //   .full-height,
+  //   .full-height body,
+  //   .full-height header,
+  //   .full-height header .view {
+  //     height: 1020px;
+  //   }
+  // }

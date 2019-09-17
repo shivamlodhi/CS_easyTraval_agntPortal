@@ -1,0 +1,70 @@
+<div class="container flex-center">
+  <div class="d-flex align-items-center content-height w-100">
+    <div class="row flex-center pt-5 mt-3 w-100">
+      <div class="col-md-6 text-center text-md-left mb-5">
+        <div class="white-text">
+          <h2 class="h1 h1-responsive font-bold wow fadeInLeft" data-wow-delay="0.3s">Welcome to Easy Travel! </h2>
+          <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+          <h6 class="wow fadeInLeft" data-wow-delay="0.3s">we are glad to have you with Us. to log in as an
+            Easy Travel agent please enter your login credentials. if you are hoping to join with East Travel Agent
+            contact us. :)</h6>
+          <br />
+          <h6 class="wow fadeInLeft" data-wow-delay="0.3s" *ngIf = "showContact">
+              <mdb-icon fas icon="fas fa-phone" class="text-white active"></mdb-icon> +94 778534221<br />
+              <mdb-icon fas icon="fas fa-phone" class="text-white active"></mdb-icon> +94 725546637<br />
+            <mdb-icon fas icon="envelope" class="text-white active"></mdb-icon> Agents@easytravel.com
+          </h6>
+          <br />
+
+          <a mdbBtn color="white" outline="true" class="wow fadeInLeft waves-light" data-wow-delay="0.3s"
+            mdbWavesEffect (click)="btnContact()"> <span *ngIf = "!showContact">Contact Us</span>
+                            <span *ngIf = "showContact">hide</span> </a>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-xl-5 offset-xl-1">
+        <!--Form-->
+        <mdb-card class="cardView" data-wow-delay="0.3s">
+          <mdb-card-body>
+            <!--Header-->
+            <div class="text-center">
+              <h3 class="white-text">
+                <mdb-icon fas icon="user" class="text-white"></mdb-icon> Sign in:
+              </h3>
+              <hr class="hr-light">
+            </div>
+            <div style="padding-top: 10px">
+            <!--Body-->
+            <div class="md-form">
+              <mdb-icon fas icon="user" class="text-white active"></mdb-icon>
+              <input type="text" id="form3" class="text-white form-control" mdbInput>
+              <label for="form3" class="text-white">Your name</label>
+            </div>
+            <div class="md-form">
+              <mdb-icon fas icon="lock" class="text-white active"></mdb-icon>
+              <input type="password" id="form4" class="text-white form-control" mdbInput>
+              <label for="form4" class="text-white">Your password</label>
+            </div>
+            <div class="text-center mt-4">
+              <button mdbBtn color="indigo" mdbWavesEffect>Sign up</button>
+              <hr class="hr-light mb-3 mt-4">
+              <div class="inline-ul text-center d-flex justify-content-center">
+                <a class="p-2 m-2 tw-ic">
+                  <mdb-icon fab icon="twitter" class="text-white"></mdb-icon>
+                </a>
+                <a class="p-2 m-2 li-ic">
+                  <mdb-icon fab icon="linkedin-in" class="text-white"></mdb-icon>
+                </a>
+                <a class="p-2 m-2 ins-ic">
+                  <mdb-icon fab icon="instagram" class="text-white"></mdb-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+          </mdb-card-body>
+        </mdb-card>
+        <!--/.Form-->
+      </div>
+    </div>
+  </div>
+</div>
