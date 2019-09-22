@@ -1,15 +1,12 @@
-.wrapper{
+agm-map {
+    height: 300px;
+  }
+
+  .wrapper{
     background-color: rgba(0, 0, 0, 0.74);
     border-radius: 20px;
     min-height: 500px;
     padding: 50px;
     margin: 50px !important;
     
-}
-
-.phone{
-    position: absolute;
-    height: 200px;
-    padding-top: 60px;
-    padding-left: 40px
 }

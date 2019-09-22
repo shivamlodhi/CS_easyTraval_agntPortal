@@ -21,7 +21,7 @@ const routes: Routes = [
         loadChildren: './users/users.module#UsersModule'
       },
       {
-        path: 'roots',
+        path: 'routes',
         loadChildren: './roots/roots.module#RootsModule'
       },
       {

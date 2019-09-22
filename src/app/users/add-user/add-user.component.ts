@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-user',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddUserComponent implements OnInit {
 
+  isLinear = false;
+  phoneNumber: number;
+  tempPhoneNumber: number;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  setPhonenumber() {
+    this.phoneNumber = 55562;
+  }
+
+  checkNum() {
+    this.phoneNumber = this.tempPhoneNumber;
+  }
 }

@@ -1,13 +1,36 @@
 <div class="white-text">
     <div class="wrapper">
-        <h1>New User Registration
+        <h1>New User Activetion
         </h1>
         <hr class="hr-light">
 
-        <div class="container">
+        <div class="align-middle">
             <div class="row">
                 <div class="col">
-                    <div>
+                        
+                    <div class="phone">
+                        <div *ngIf="!this.phoneNumber">
+                            <h1>Enter users phone Number:</h1>
+                            <div class="row">
+                                    <div class="col">
+                            <div class="md-form">
+                                <mdb-icon fas icon="phone" class="text-white active"></mdb-icon>
+                                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
+                                    [(ngModel)]="tempPhoneNumber" id="form3" class="text-white form-control" mdbInput>
+                                <label for="form3" class="text-white">User's phone Number</label>
+                                <span>EX: 774586218</span>
+                            </div>
+                        </div>
+                        <div class="col">
+                                <div class="md-form">
+                                        <button type="button" class="btn btn-success  btn-rounded btn-lg waves-effect" (click) = "checkNum()">Proceed</button>
+                                    </div>
+                        </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="this.phoneNumber">
 
                         <!-- <div class="container"> -->
                         <div class="row">
@@ -41,29 +64,16 @@
                             <label for="form3" class="text-white">User's NIC Number</label>
                         </div>
                         <div class="md-form">
-                            <mdb-icon fas icon="male" class="text-white"></mdb-icon>
-                            <label for="form3" class="text-white">User's Gender</label>
-                            <br />
-                        </div>
-                        <div style="padding-left: 20px">
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="defaultUnchecked"
-                                    name="defaultExampleRadios">
-                                <label class="custom-control-label" for="defaultUnchecked">Male</label>
+                                <mdb-icon fas icon="money-bill-alt" class="text-white active"></mdb-icon>
+                                <input type="text" id="form3" class="text-white form-control col-md-6" mdbInput>
+                                <label for="form3" class="text-white">User's Account Balence</label>
                             </div>
-                            <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="defaultUnchecked"
-                                    name="defaultExampleRadios">
-                                <label class="custom-control-label" for="defaultUnchecked">Female</label>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
                 <div class="col">
                     <div class="container flex-center">
-                        <img src='../assets/img/EasyT.png'
-                        style="width: 80%; height: 80%">
+                        <img src='../assets/img/EasyT.png' style="width: 80%; height: auto">
                     </div>
                 </div>
             </div>
