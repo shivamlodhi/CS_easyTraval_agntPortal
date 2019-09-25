@@ -26,7 +26,7 @@ const routes: Routes = [
       },
       {
         path: 'timeTables',
-        loadChildren: './time-tables/time-tables-routing.module#TimeTablesRoutingModule',
+        loadChildren: './time-tables/time-tables.module#TimeTablesModule',
       }
     ]
   }

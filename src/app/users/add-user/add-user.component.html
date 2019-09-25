@@ -7,78 +7,132 @@
         <div class="align-middle">
             <div class="row">
                 <div class="col">
-                        
+
                     <div class="phone">
                         <div *ngIf="!this.phoneNumber">
                             <h1>Enter users phone Number:</h1>
                             <div class="row">
-                                    <div class="col">
-                            <div class="md-form">
-                                <mdb-icon fas icon="phone" class="text-white active"></mdb-icon>
-                                <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required
-                                    [(ngModel)]="tempPhoneNumber" id="form3" class="text-white form-control" mdbInput>
-                                <label for="form3" class="text-white">User's phone Number</label>
-                                <span>EX: 774586218</span>
-                            </div>
-                        </div>
-                        <div class="col">
-                                <div class="md-form">
-                                        <button type="button" class="btn btn-success  btn-rounded btn-lg waves-effect" (click) = "checkNum()">Proceed</button>
+                                <div class="col">
+                                    <form #phoneNumber="ngForm">
+                                    <div class="md-form">
+                                        <mdb-icon fas icon="phone" class="text-white active"></mdb-icon>
+                                        <input type="text" name="phone"
+                                            [(ngModel)]="tempPhoneNumber" class="text-white form-control"
+                                            mdbInput required>
+                                        <label for="form3" class="text-white">User's phone Number</label>
+                                        <span>EX: 774586218<br /></span>
                                     </div>
-                        </div>
+                                </form>
+                                </div>
+                                <div class="col">
+                                    <div class="md-form">
+                                        <button type="button" class="btn btn-success  btn-rounded btn-lg waves-effect"
+                                            (click)="checkNum()" [disabled]="!phoneNumber.valid">Proceed</button>
+                                    </div>
+                                </div>
+                                <span *ngIf="!this.user && this.showError" class="phoneError">Sorry! Phone Number is invalid or not
+                                        registered with the Easy Travel App!!</span>
                             </div>
                         </div>
                     </div>
-                    
+
                     <div *ngIf="this.phoneNumber">
 
                         <!-- <div class="container"> -->
-                        <div class="row">
-                            <div class="col">
-                                <div class="md-form">
-                                    <mdb-icon fas icon="user" class="text-white active"></mdb-icon>
-                                    <input type="text" id="form3" class="text-white form-control col-md-12" mdbInput>
-                                    <label for="form3" class="text-white">User's First Name</label>
+                        <form #userForm>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="md-form">
+                                        <mdb-icon fas icon="user" class="text-white active"></mdb-icon>
+                                        <input type="text" name="fName" class="text-white form-control col-md-12"
+                                            mdbInput [(ngModel)]="this.user.data.firstName" required>
+                                        <label for="form3" class="text-white">User's First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="md-form">
+                                        <input type="text" name="lName" class="text-white form-control col-md-12"
+                                            mdbInput [(ngModel)]="this.user.data.lastName" required>
+                                        <label for="form3" class="text-white">User's Last Name</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="md-form">
-                                    <input type="text" id="form3" class="text-white form-control col-md-12" mdbInput>
-                                    <label for="form3" class="text-white">User's Last Name</label>
-                                </div>
+                            <div class="md-form">
+                                <mdb-icon fas icon="phone" class="text-white active"></mdb-icon>
+                                <input type="text" name="phoneNumber" class="text-white form-control col-md-6" mdbInput
+                                    [(ngModel)]="this.user.data.phoneNumber" disabled>
+                                <label for="form3" class="text-white">User's phone Number</label>
+                                <span>you can't edit users Phone Number</span>
                             </div>
-                        </div>
-                        <div class="md-form">
-                            <mdb-icon fas icon="phone" class="text-white active"></mdb-icon>
-                            <input type="text" id="form3" class="text-white form-control col-md-6" mdbInput>
-                            <label for="form3" class="text-white">User's phone Number</label>
-                        </div>
-                        <div class="md-form">
-                            <mdb-icon fas icon="at" class="text-white active"></mdb-icon>
-                            <input type="text" id="form3" class="text-white form-control col-md-6" mdbInput>
-                            <label for="form3" class="text-white">User's Email address</label>
-                        </div>
-                        <div class="md-form">
-                            <mdb-icon fas icon="id-card" class="text-white active"></mdb-icon>
-                            <input type="text" id="form3" class="text-white form-control col-md-6" mdbInput>
-                            <label for="form3" class="text-white">User's NIC Number</label>
-                        </div>
-                        <div class="md-form">
+                            <div class="md-form">
+                                <mdb-icon fas icon="at" class="text-white active"></mdb-icon>
+                                <input type="email" name="email" class="text-white form-control col-md-6" mdbInput
+                                    [(ngModel)]="this.user.data.email">
+                                <label for="form3" class="text-white">User's Email address</label>
+                            </div>
+                            <div class="md-form">
+                                <mdb-icon fas icon="id-card" class="text-white active"></mdb-icon>
+                                <input type="text" name="nic" class="text-white form-control col-md-6" mdbInput
+                                    [(ngModel)]="this.user.data.nic" required>
+                                <label for="form3" class="text-white">User's NIC Number</label>
+                            </div>
+                            <div class="md-form">
                                 <mdb-icon fas icon="money-bill-alt" class="text-white active"></mdb-icon>
-                                <input type="text" id="form3" class="text-white form-control col-md-6" mdbInput>
+                                <input type="number" name="balence" class="text-white form-control col-md-6" mdbInput
+                                    [(ngModel)]="this.user.data.accountBalance" required>
                                 <label for="form3" class="text-white">User's Account Balence</label>
                             </div>
 
+                        </form>
+
                     </div>
                 </div>
-                <div class="col">
+                <div class="col" *ngIf="!this.phoneNumber">
                     <div class="container flex-center">
                         <img src='../assets/img/EasyT.png' style="width: 80%; height: auto">
+                    </div>
+                </div>
+                <div class="col" *ngIf="this.phoneNumber">
+                    <div class="container flex-center">
+                        <div class="inactiveStatus" *ngIf="this.user.data.status == 'active' "
+                            (click)="basicModal.show()">
+                            edit User Details
+                        </div>
+                        <div class="activeStatus" *ngIf="this.user.data.status == 'inactive' "
+                            (click)="basicModal.show()">
+                            Activate User
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
 
+    </div>
+</div>
+
+
+<!-- <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.show()" mdbWavesEffect>Launch demo modal</button> -->
+
+<div mdbModal #basicModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog"
+    aria-labelledby="myBasicModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title w-100" id="myModalLabel">Are you sure?</h4>
+            </div>
+            <div class="modal-body">
+                Are you Sure, do you want to Change the Details?
+            </div>
+            <div class="modal-footer">
+                <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                    (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                    (click)="basicModal.hide(); this.updateUser()">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>

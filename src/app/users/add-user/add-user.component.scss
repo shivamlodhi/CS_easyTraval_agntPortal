@@ -13,3 +13,33 @@
     padding-top: 60px;
     padding-left: 40px
 }
+
+.activeStatus {
+    background-color: rgb(18, 228, 63);
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 60px
+}
+
+.inactiveStatus {
+    background-color: rgba(18, 151, 228, 0.747);
+    width: 80%;
+    height: auto;
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 60px
+}
+
+.modal-dialog{
+    background-color: rgba(0, 0, 0, 0.336);
+    color: white;
+}
+.phoneError{
+    color: rgb(201, 44, 65)
+}
