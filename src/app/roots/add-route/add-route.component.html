@@ -13,7 +13,8 @@
                 (dragEnd)="markerDragEnd($event)"></agm-marker>
               <agm-marker [latitude]="6.9" [longitude]="longitude" [markerDraggable]="true"
                 (dragEnd)="markerDragEnd($event)"></agm-marker> -->
-                <agm-direction [origin]="origin" [destination]="destination" [waypoints]="waypoints"></agm-direction>
+                <agm-direction [origin]="origin" [destination]="destination" ></agm-direction>
+                <!-- [waypoints]="waypoints" -->
 
             </agm-map>
             <!-- <h5>Address: {{address}}</h5>
@@ -29,7 +30,8 @@
                       mdbInput (input)="dt.filterGlobal($event.target.value, 'contains')">
                   <label for="form3" class="text-white">Search</label>
               </div>
-              <p-table [columns]="cols" [value]="this.routes" [responsive]="true" [rows]="10" [paginator]="true" #dt [resizableColumns]="true" (onRowSelect)="setRuote($event)">
+              <p-table [columns]="cols" [value]="this.routes" [responsive]="true" [rows]="10" [paginator]="true" #dt 
+                       [resizableColumns]="true" (onRowSelect)="setRoute($event)" selectionMode="single" [(selection)]="selectedCar1" [loading]="loading">
                   <ng-template pTemplate="header" let-columns>
                       <tr>
                           <th *ngFor="let col of columns" Class= "tableHeader" pResizableColumn>
@@ -39,7 +41,7 @@
                       </tr>
                   </ng-template>
                   <ng-template pTemplate="body" let-rowData let-columns="columns">
-                      <tr>
+                      <tr [pSelectableRow]="rowData">
                           <td *ngFor="let col of columns">
                                   {{rowData[col.field]}}
                           </td>

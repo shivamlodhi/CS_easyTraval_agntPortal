@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class AddRouteComponent implements OnInit {
 
   title: string = 'AGM project';
-  cols: any;F
+  cols: any; F
   latitude: number;
   longitude: number;
   zoom: number;
@@ -23,11 +23,11 @@ export class AddRouteComponent implements OnInit {
   public searchElementRef: ElementRef;
   routes: any;
 
-  origin = { lat: 29.8174782, lng: -95.6814757 }
-  destination = { lat: 40.6976637, lng: -74.119764 }
+  origin: any; // = { lat: 29.8174782, lng: -95.6814757 }
+  destination: any; //= { lat: 40.6976637, lng: -74.119764 }
   waypoints = [
-     {location: { lat: 39.0921167, lng: -94.8559005 }},
-     {location: { lat: 41.8339037, lng: -87.8720468 }}
+    { location: { lat: 39.0921167, lng: -94.8559005 } },
+    { location: { lat: 41.8339037, lng: -87.8720468 } }
   ]
 
   constructor(
@@ -41,11 +41,11 @@ export class AddRouteComponent implements OnInit {
   ngOnInit() {
     this.cols = [
       { field: 'id', header: 'Route Number' },
-      {field: 'title', header: 'Tiltle' },
+      { field: 'title', header: 'Tiltle' },
       { field: 'mainStops', header: 'Main Stops' }
-  ];
+    ];
 
-  
+
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       this.setCurrentLocation();
@@ -87,7 +87,7 @@ export class AddRouteComponent implements OnInit {
         this.longitude = position.coords.longitude;
         this.zoom = 8;
         this.getAddress(this.latitude, this.longitude);
-        console.log("this"+this.latitude );
+        console.log("this" + this.latitude);
       });
     }
   }
@@ -99,7 +99,7 @@ export class AddRouteComponent implements OnInit {
     this.longitude = $event.coords.lng;
     this.getAddress(this.latitude, this.longitude);
   }
-  show(details){
+  show(details) {
     console.log(details);
     this.router.navigate(['timeTables', details]);
   }
@@ -120,6 +120,16 @@ export class AddRouteComponent implements OnInit {
       }
 
     });
+  }
+
+  setRoute(event) {
+    console.log(event.data.secondEnd._long);
+    console.log(event.data.secondEnd._lat);
+
+    this.origin = { lat: event.data.firstEnd._lat, lng: event.data.firstEnd._long };
+    this.destination = { lat: event.data.secondEnd._lat, lng: event.data.secondEnd._long };
+
+
   }
 
 }
