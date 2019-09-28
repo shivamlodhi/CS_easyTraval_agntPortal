@@ -10,9 +10,16 @@
           <div>
             <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" >
               <!-- <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true"
-                (dragEnd)="markerDragEnd($event)"></agm-marker>
-              <agm-marker [latitude]="6.9" [longitude]="longitude" [markerDraggable]="true"
-                (dragEnd)="markerDragEnd($event)"></agm-marker> -->
+                (dragEnd)="markerDragEnd($event)"></agm-marker>-->
+              <agm-marker [latitude]="stop.stop._lat" [longitude]="stop.stop._long" *ngFor = "let stop of stops" [iconUrl] ="
+              {
+                url: '../../../assets/img/easy-travel-pin.png',
+                scaledSize: {
+                    width: 30,
+                    height: 30
+                }
+            }"></agm-marker> 
+
                 <agm-direction [origin]="origin" [destination]="destination" ></agm-direction>
                 <!-- [waypoints]="waypoints" -->
 

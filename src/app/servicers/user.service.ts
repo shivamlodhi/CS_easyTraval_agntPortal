@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as firebase from 'firebase';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 
 @Injectable({
@@ -17,6 +18,7 @@ export class UserService {
 
     constructor(
         private afs: AngularFirestore,
+        private firebaseAuth: AngularFireAuth
     ) { }
 
     getUserName(userId: string) {
@@ -51,5 +53,9 @@ export class UserService {
 
     async updatUser(usetId , userDetails ){
         await this.afs.doc('passengers/' + usetId).set( userDetails );
+    }
+
+    signIn(email, password) {
+        return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
     }
 }

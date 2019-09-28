@@ -29,6 +29,7 @@ export class AddRouteComponent implements OnInit {
     { location: { lat: 39.0921167, lng: -94.8559005 } },
     { location: { lat: 41.8339037, lng: -87.8720468 } }
   ]
+  stops: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
@@ -44,6 +45,11 @@ export class AddRouteComponent implements OnInit {
       { field: 'title', header: 'Tiltle' },
       { field: 'mainStops', header: 'Main Stops' }
     ];
+
+    this.routeService.getStops().subscribe(res => {
+      this.stops = res;
+      console.log(res);
+    });
 
 
     //load Places Autocomplete
@@ -128,7 +134,6 @@ export class AddRouteComponent implements OnInit {
 
     this.origin = { lat: event.data.firstEnd._lat, lng: event.data.firstEnd._long };
     this.destination = { lat: event.data.secondEnd._lat, lng: event.data.secondEnd._long };
-
 
   }
 

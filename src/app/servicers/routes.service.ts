@@ -31,9 +31,9 @@ export class RouteService {
         return this.listCollection;
     }
 
-    getTimeTables(id){
+    getTimeTables(id) {
         this.listCollection = this.afs
-            .collection<any>('routes/'+id+'/timeTables').snapshotChanges().pipe(
+            .collection<any>('routes/' + id + '/timeTables').snapshotChanges().pipe(
                 map(actions => actions.map(a => {
                     const data = a.payload.doc.data();
                     const id = a.payload.doc.id;
@@ -41,6 +41,19 @@ export class RouteService {
                 }))
             );
         return this.listCollection;
+    }
+
+    getMainStops(id) {
+        return this.afs.collection<any>('routes').doc(id).snapshotChanges()
+            .pipe(
+                map(a => {
+                    return a.payload.data();
+                })
+            );
+    }
+
+    setTurn(turn, id) {
+        this.afs.collection<any>('routes/' + id + '/timeTables').add(turn);
     }
     checkPhoneNum(userPhoeNumber) {
         this.User = this.afs
@@ -62,5 +75,17 @@ export class RouteService {
 
     async updatUser(usetId, userDetails) {
         await this.afs.doc('passengers/' + usetId).set(userDetails);
+    }
+
+    getStops(){
+        this.listCollection = this.afs
+            .collection<any>('stops').snapshotChanges().pipe(
+                map(actions => actions.map(a => {
+                    const data = a.payload.doc.data();
+                    const id = a.payload.doc.id;
+                    return { id, ...data };
+                }))
+            );
+        return this.listCollection;
     }
 }

@@ -51,5 +51,6 @@ export class AddUserComponent implements OnInit {
   updateUser(){
     this.user.data.status = 'active';
     this.userService.updatUser(this.user.id , this.user.data);
+    this.phoneNumber = null;
   }
 }

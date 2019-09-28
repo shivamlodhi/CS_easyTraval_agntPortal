@@ -1,38 +1,137 @@
 <div class="white-text">
     <div class="wrapper">
-      <h1>Route Time Table: Route Number {{id}}
-      </h1>
-      <hr class="hr-light">
-  
-      <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>Time Table: Route Number {{id}}
+                </h1>
+            </div>
+            <div class="col">
+                <div style="height: auto; float: right">
+                    <button style="float: right;" type="button" class="btn btn-primary btn-rounded btn-lg waves-effect"
+                        (click)="basicModal.show()">
+                        Add Turn</button>
+                    <br /><br />
+                </div>
+            </div>
+        </div>
+        <hr class="hr-light">
+
+        <div class="container">
             <div>
-                <div class="md-form" style="margin: 0px">
+                <div class="md-form " style="margin: 0px">
                     <mdb-icon fas icon="search" class="text-white active"></mdb-icon>
-                    <input type="text" name="search" class="text-white form-control"
-                        mdbInput (input)="dt.filterGlobal($event.target.value, 'contains')">
+                    <input type="text" name="search" class="text-white form-control" mdbInput
+                        (input)="dt.filterGlobal($event.target.value, 'contains')">
                     <label for="form3" class="text-white">Search</label>
                 </div>
-                <p-table [columns]="cols" [value]="this.timetable" [responsive]="true" [rows]="10" [paginator]="true" #dt [resizableColumns]="true">
+                <p-table [columns]="cols" [value]="this.timetable" [responsive]="true" [rows]="10" [paginator]="true"
+                    #dt [resizableColumns]="true">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th *ngFor="let col of columns" Class= "tableHeader" pResizableColumn>
+                            <th *ngFor="let col of columns" Class="tableHeader" pResizableColumn>
                                 {{col.header}}
                             </th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns" >
+                    <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
                             <td *ngFor="let col of columns">
-                                    {{rowData[col.field]}}
+                                {{rowData[col.field]}}
                             </td>
                         </tr>
                     </ng-template>
                 </p-table>
-         
-  
-  
-      </div>
-  
-  
+
+
+            </div>
+
+
+        </div>
     </div>
-  </div>
+
+    <div mdbModal #basicModal="mdbModal" class="modal fade top" tabindex="-1" role="dialog"
+        aria-labelledby="myBasicModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-notify modal-info" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title w-100" id="myModalLabel">Add Turn</h4>
+                </div>
+                <div class="modal-body">
+                    <h3>Fill the Details</h3>
+                    <hr>
+                    <form>
+                        <div class="row" style="margin: 5px">
+                            <div class="col">
+                                Starting locetion:
+                            </div>
+                            <div class="col">
+                                <div class="btn-group" mdbDropdown>
+                                    <button mdbDropdownToggle type="button" mdbBtn color="primary"
+                                        class="dropdown-toggle waves-light" mdbWavesEffect>
+                                        {{this.start || 'Select'}}
+                                    </button>
+
+                                    <div class="dropdown-menu dropdown-primary">
+                                        <a class="dropdown-item" *ngFor="let stop of mainStops"
+                                            (click)="this.setStart(stop)">{{stop}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 5px">
+                            <div class="col">
+                                Ending locetion:
+                            </div>
+                            <div class="col">
+                                <div class="btn-group" mdbDropdown>
+                                    <button mdbDropdownToggle type="button" mdbBtn color="primary"
+                                        class="dropdown-toggle waves-light" mdbWavesEffect>
+                                        {{this.end || 'Select'}}
+                                    </button>
+
+                                    <div class="dropdown-menu dropdown-primary">
+
+                                        <a class="dropdown-item" *ngFor="let stop of mainStops"
+                                            (click)="this.setEnd(stop)">{{stop}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 10px">
+                            <div class="col">
+                                Deprture Time:
+                            </div>
+                            <div class="col">
+                                <div class="ui-g-12 ui-md-4">
+                                    <p-calendar [(ngModel)]="this.Dtime" [timeOnly]="true" class="timer" hourFormat="24"
+                                        name="dtime"></p-calendar>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="row" style="margin: 10px">
+                            <div class="col">
+                                Arrival Time:
+                            </div>
+                            <div class="col">
+                                <div class="ui-g-12 ui-md-4">
+                                    <p-calendar [(ngModel)]="this.Atime" [timeOnly]="true" class="timer" hourFormat="24"
+                                        name="atime"></p-calendar>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                        (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                    <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect
+                        (click)="basicModal.hide(); this.addTurn()" [disabled] = "this.showError">Add Turn</button><br/>
+                </div>
+            </div>
+        </div>
+    </div>
