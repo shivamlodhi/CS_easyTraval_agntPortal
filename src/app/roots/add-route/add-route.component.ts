@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core'
 import { MapsAPILoader, MouseEvent } from '@agm/core';
 import { RouteService } from '../../servicers/routes.service';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/servicers/user.service';
+import { CookieService } from 'ngx-cookie-service';
 /// <reference types="@types/googlemaps" />
 
 @Component({
@@ -30,16 +32,25 @@ export class AddRouteComponent implements OnInit {
     { location: { lat: 41.8339037, lng: -87.8720468 } }
   ]
   stops: any;
+  user: any;
 
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone,
     private router: Router,
-    private routeService: RouteService
-  ) { }
+    private routeService: RouteService,
+    private userService: UserService,
+    private cookieService: CookieService
+  ) {
+  }
 
 
   ngOnInit() {
+    this.user = this.userService.checkStatus();
+    console.log(this.cookieService.get('login'));
+    if (!this.user) {
+      this.router.navigate(['home']);
+    }
     this.cols = [
       { field: 'id', header: 'Route Number' },
       { field: 'title', header: 'Tiltle' },
@@ -57,30 +68,13 @@ export class AddRouteComponent implements OnInit {
       this.setCurrentLocation();
       this.geoCoder = new google.maps.Geocoder;
 
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
-      autocomplete.addListener("place_changed", () => {
-        this.ngZone.run(() => {
-          //get the place result
-          let place: google.maps.places.PlaceResult = autocomplete.getPlace();
 
-          //verify result
-          if (place.geometry === undefined || place.geometry === null) {
-            return;
-          }
 
-          //set latitude, longitude and zoom
-          this.latitude = place.geometry.location.lat();
-          this.longitude = place.geometry.location.lng();
-          this.zoom = 12;
-        });
-      });
+
     });
 
     this.routeService.getAllRourtes().subscribe(res => {
       this.routes = res;
-      console.log(this.routes);
     });
 
   }
@@ -134,7 +128,6 @@ export class AddRouteComponent implements OnInit {
 
     this.origin = { lat: event.data.firstEnd._lat, lng: event.data.firstEnd._long };
     this.destination = { lat: event.data.secondEnd._lat, lng: event.data.secondEnd._long };
-
   }
 
 }

@@ -13,7 +13,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { TableModule } from 'primeng/table';
+import { AuthGuard } from './guards/AuthGuard';
 
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -36,7 +38,7 @@ import { TableModule } from 'primeng/table';
       apiKey: 'AIzaSyCsgjBTVWY_RZum12krjO8ppeAyY1ynYok'
     })
   ],
-  providers: [],
+  providers: [ AuthGuard, CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

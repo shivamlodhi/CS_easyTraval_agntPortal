@@ -58,4 +58,29 @@ export class UserService {
     signIn(email, password) {
         return this.firebaseAuth.auth.signInWithEmailAndPassword(email, password);
     }
+
+    async signOut() {
+        try {
+            return await this.firebaseAuth.auth.signOut();
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    checkStatus() {
+        return this.firebaseAuth.auth.currentUser;
+    }
+    
+    isLoggedIn(): Observable<boolean> {
+        return this.firebaseAuth.authState.pipe(
+            map(user => {
+                if (user !== null) {
+                    return true;
+                }
+                return false;
+            },
+                error => {
+                    return false;
+                }));
+    }
 }

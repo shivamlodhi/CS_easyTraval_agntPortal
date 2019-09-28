@@ -35,18 +35,22 @@
             </div>
             <div style="padding-top: 10px">
             <!--Body-->
+            <form #signIn="ngForm">
             <div class="md-form">
               <mdb-icon fas icon="user" class="text-white active"></mdb-icon>
-              <input type="text" id="form3" class="text-white form-control" mdbInput>
+              <input type="email" id="form3" class="text-white form-control" mdbInput [(ngModel)] = "email" name = "email">
               <label for="form3" class="text-white">Your e-mail</label>
             </div>
             <div class="md-form">
               <mdb-icon fas icon="lock" class="text-white active"></mdb-icon>
-              <input type="password" id="form4" class="text-white form-control" mdbInput>
+              <input type="password" id="form4" class="text-white form-control" mdbInput [(ngModel)] = "password" name = "password">
               <label for="form4" class="text-white">Your password</label>
             </div>
+            </form>
             <div class="text-center mt-4">
-              <button mdbBtn color="indigo" mdbWavesEffect>Sign up</button>
+              <span style="color: rgb(253, 253, 253)" *ngIf = 'showError'> Invalid Credentials</span><br/>
+              <button mdbBtn color="indigo" mdbWavesEffect (click) = "this.usersignIn()" *ngIf = "!this.login">Sign In</button>
+              <button mdbBtn color="indigo" mdbWavesEffect (click) = "signOut()" *ngIf = "this.login">Sign Out</button>
               <hr class="hr-light mb-3 mt-4">
               <div class="inline-ul text-center d-flex justify-content-center">
                 <a class="p-2 m-2 tw-ic">
