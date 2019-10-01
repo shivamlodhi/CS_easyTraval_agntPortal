@@ -35,7 +35,7 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserAnimationsModule,
     MDBBootstrapModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCsgjBTVWY_RZum12krjO8ppeAyY1ynYok'
+      apiKey: 'key'
     })
   ],
   providers: [ AuthGuard, CookieService ],
